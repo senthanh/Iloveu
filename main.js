@@ -5,17 +5,16 @@ document.addEventListener('DOMContentLoaded', function() {
   var min = document.querySelector('.min');
   var second = document.querySelector('.second');
 
-  var startDate = new Date(2022, 29 ,9),
-  days.innerText = Math.floor((new Date - startDate)/86400000);
-  countTime();
+ const yourDate = new Date("2022-09-29T00:00:00"),
 
-  function countTime() {
-    let today = new Date();
-    let ms = (today - startDate) % 86400000;
-    hour.innerText = Math.floor(ms / 3600000);
-    min.innerText = Math.floor(ms % 3600000 / 60000);
-    second.innerText = Math.floor(ms % 3600000 % 60000 / 1000);
-  }
+ function olock() {
+            var today = new Date(),
+            hrs = (Math.floor( Math.floor((today - yourDate) / 1000) / 60 / 60)) % 24,
+            min = (Math.floor( Math.floor((today - yourDate) / 1000) / 60)) % 60,
+            sec =  Math.floor((today - yourDate) / 1000) % 60;
+            rootTime.textContent = `${(hrs>9)?hrs:"0"+hrs}:${(min>9)?min:"0"+min}:${(sec>9)?sec:"0"+sec}`;
+      } olock();
+      var timer = setInterval(function(){olock()}, 1000);
 
   setInterval(countTime, 1000);
 
